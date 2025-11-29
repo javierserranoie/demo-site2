@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Forge Your Path</title>
+
+  <style>
+    :root {
+      --bg: #05070e;
+      --grid: rgba(255, 255, 255, 0.04);
+      --fg: #e9f2ff;
+      --glow1: #2bbcff;
+      --glow2: #8c54ff;
+      --accent: #27ffe2;
+      --mono: "JetBrains Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(135deg, #05070e, #0b1020);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      color: var(--fg);
+      overflow-x: hidden;
+    }
+
+    /* Tech grid overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.18;
+    }
+
+    /* Main floating card */
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 780px;
+      padding: 3rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      box-shadow:
+        0 0 50px rgba(39, 255, 226, 0.12),
+        0 0 120px rgba(139, 84, 255, 0.1);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, var(--glow1), var(--glow2));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .sub {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #b3c6e2;
+    }
+
+    .quote {
+      background: rgba(255,255,255,0.05);
+      padding: 1rem 1.25rem;
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      font-family: var(--mono);
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    button {
+      background: linear-gradient(90deg, var(--glow1), var(--glow2));
+      border: none;
+      padding: 0.9rem 1.5rem;
+      font-size: 1.1rem;
+      color: #08151e;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(43,188,255,0.35);
+    }
+
+    /* particles */
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 50;
+      animation: rise 1.3s ease-out forwards;
+      opacity: 0;
+      font-size: 20px;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-170px) scale(0.6); opacity: 0; }
+    }
+
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: #8aa5c7;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>Forge Your Path</h1>
+    <div class="sub">The future belongs to those who build it.</div>
+
+    <div class="quote">“Your next version won’t be perfect — ship it anyway.”</div>
+
+    <button onclick="celebrate()">I’m taking action today ⚡</button>
+
+    <footer>
+      Served as a single static file<code></code>.
+    </footer>
+  </div>
+
+  <script>
+    function celebrate() {
+      const symbols = ["⚡","✨","🚀","🔥","🌟"];
+      for (let i = 0; i < 25; i++) {
+        const p = document.createElement("div");
+        p.className = "particle";
+        p.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+        p.style.left = (window.innerWidth * Math.random()) + "px";
+        p.style.top = (window.innerHeight - 40) + "px";
+        document.body.appendChild(p);
+        p.style.animationDuration = (0.8 + Math.random()*0.6) + "s";
+        setTimeout(() => p.remove(), 1600);
+      }
+    }
+  </script>
+</body>
+</html>
+
