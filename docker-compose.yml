@@ -10,7 +10,7 @@ services:
       - "traefik.enable=true"
 
       # Router: match Host AND PathPrefix /site2
-      - "traefik.http.routers.techie-site.rule=Host(`jslabs.ddns.net`) && PathPrefix(`/site2`)"
+      - "traefik.http.routers.techie-site.rule=(Host(`jslabs.es`) || Host(`jslabs.eu`) || Host(`jslabs.ddns.net`)) && PathPrefix(`/site2`)"
       - "traefik.http.routers.techie-site.entrypoints=websecure"
       - "traefik.http.routers.techie-site.tls=true"
       - "traefik.http.routers.techie-site.tls.certresolver=letsencrypt"
